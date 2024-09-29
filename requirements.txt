@@ -1,0 +1,11 @@
+google-api-python-client
+google-auth
+psycopg2-binary
+pymediainfo
+opencv-python
+tensorflow
+ffmpeg-python
+speechrecognition
+PyPDF2
+nltk
+scikit-learn

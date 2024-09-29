@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: data-processing-
+spec:
+  entrypoint: main
+  templates:
+  - name: main
+    steps:
+    - - name: list-files
+        template: docker-task
+        arguments:
+          parameters: [{"name": "task", "value": "list_files"}]
+    - - name: extract-metadata
+        template: docker-task
+        arguments:
+          parameters: [{"name": "task", "value": "extract_metadata"}]
+    # Add more steps following the same pattern
+  - name: docker-task
+    inputs:
+      parameters:
+      - name: task
+    container:
+      image: your-docker-image
+      command: ["python", "main.py"]
+      args: ["--task", "{{inputs.parameters.task}}"]
